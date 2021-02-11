@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, render_template
 from webargs.flaskparser import use_args
 
 from api import db
@@ -6,19 +6,10 @@ from api.models import Message, MessageSchema, message_schema
 from api.utils import validate_json_content_type, token_required
 from api.messages import messages_bp
 
-# @messages_bp.route('/api/v1/messages', methods=['GET'])
-# def get_messages():
-#     messages = Message.query.all()
 
-#     for message in messages:
-#         message.msg_counter += 1
-#     db.session.commit()
-    
-#     return jsonify({
-#         'success': True,
-#         'data': MessageSchema(many=True).dump(messages),
-#         'number_of_records': len(messages)
-#     })
+@messages_bp.route('/')
+def get_documentation():
+    return render_template('api_documentation.html')
 
 
 @messages_bp.route('/messages/<int:message_id>', methods=['GET'])
