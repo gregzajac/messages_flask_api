@@ -2,7 +2,6 @@ import jwt
 from flask import current_app
 from datetime import datetime, timedelta
 from marshmallow import Schema, fields, validate
-from werkzeug.security import generate_password_hash
 from api import db
 
 

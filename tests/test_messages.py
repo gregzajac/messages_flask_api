@@ -133,7 +133,7 @@ def test_update_message_invalid_content_type(client, sample_data, token, message
     assert msg in response_data['message']
 
 
-def test_update_message_invalid_missing_token(client, sample_data, message):
+def test_update_message_missing_token(client, sample_data, message):
     response = client.put('/api/v1/messages/1', 
                            data=message)
     response_data = response.get_json()

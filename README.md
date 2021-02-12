@@ -48,9 +48,9 @@ flask db-manage remove-data
 
 ## Tests
 
-In order to execute tests located in `tests/` run the command:
+In order to execute tests (with details) located in `tests/` run the command:
 ```buildoutcfg
-python -m pytest tests/
+python -m pytest -v
 ```
 
 ## Technologies / Tools

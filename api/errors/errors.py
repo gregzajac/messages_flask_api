@@ -54,6 +54,5 @@ def unsupported_media_type_error(err):
 
 @errors_bp.app_errorhandler(500)
 def internal_server_error(err): 
-    print(err)
     db.session.rollback()   # an error can be linked with processing some query
     return ErrorResponse(err.description, 500).to_response()
