@@ -1,15 +1,12 @@
 from flask import Response, jsonify, make_response
+
 from api import db
 from api.errors import errors_bp
 
 
 class ErrorResponse:
-
     def __init__(self, message: str, http_status: int):
-        self.payload = {
-            'success': False,
-            'message': message
-        }
+        self.payload = {"success": False, "message": message}
         self.http_status = http_status
 
     def to_response(self) -> Response:
@@ -20,39 +17,39 @@ class ErrorResponse:
 
 @errors_bp.app_errorhandler(400)
 def bad_request_error(err):
-    if hasattr(err, 'data'):
-        error_message = err.data.get('messages', {}).get('json', {})
+    if hasattr(err, "data"):
+        error_message = err.data.get("messages", {}).get("json", {})
     else:
         error_message = err.description
     return ErrorResponse(error_message, 400).to_response()
 
 
 @errors_bp.app_errorhandler(401)
-def unauthorized_error(err):  
+def unauthorized_error(err):
     return ErrorResponse(err.description, 401).to_response()
 
 
 @errors_bp.app_errorhandler(404)
-def not_found_error(err):  
+def not_found_error(err):
     return ErrorResponse(err.description, 404).to_response()
 
 
 @errors_bp.app_errorhandler(405)
-def method_not_allowed_error(err):  
+def method_not_allowed_error(err):
     return ErrorResponse(err.description, 405).to_response()
 
 
 @errors_bp.app_errorhandler(409)
-def conflict_error(err):  
+def conflict_error(err):
     return ErrorResponse(err.description, 409).to_response()
 
 
 @errors_bp.app_errorhandler(415)
-def unsupported_media_type_error(err):  
+def unsupported_media_type_error(err):
     return ErrorResponse(err.description, 415).to_response()
 
 
 @errors_bp.app_errorhandler(500)
-def internal_server_error(err): 
-    db.session.rollback()   # an error can be linked with processing some query
+def internal_server_error(err):
+    db.session.rollback()  # an error can be linked with processing some query
     return ErrorResponse(err.description, 500).to_response()
