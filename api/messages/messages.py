@@ -3,7 +3,7 @@ from webargs.flaskparser import use_args
 
 from api import db
 from api.messages import messages_bp
-from api.models import Message, MessageSchema, message_schema
+from api.models import Message, message_schema
 from api.utils import token_required, validate_json_content_type
 
 

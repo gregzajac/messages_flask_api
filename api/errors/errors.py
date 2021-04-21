@@ -1,4 +1,4 @@
-from flask import Response, jsonify, make_response
+from flask import Response, jsonify
 
 from api import db
 from api.errors import errors_bp

@@ -4,7 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from api import db
 from api.auth import auth_bp
-from api.models import User, UserSchema, user_schema
+from api.models import User, user_schema
 from api.utils import token_required, validate_json_content_type
 
 
@@ -33,10 +33,10 @@ def login(args: dict):
     user = User.query.filter(User.username == args["username"]).first()
 
     if not user:
-        abort(401, description=f"Invalid credentials")
+        abort(401, description="Invalid credentials")
 
     if not check_password_hash(user.password, args["password"]):
-        abort(401, description=f"Invalid credentials")
+        abort(401, description="Invalid credentials")
 
     token = user.generate_jwt()
 
